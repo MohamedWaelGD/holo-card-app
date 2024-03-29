@@ -6,5 +6,4 @@ export interface CardDetails {
 
 interface Gradient {
     color: string;
-    position: string;
 }
