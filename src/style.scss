@@ -1,0 +1,127 @@
+:root {
+  --transition-speed: 200ms;
+  --border-radius: 12px;
+  --gradient-opacity: 0.3;
+  --animate-rotation-ms: 6000ms;
+  --animate-rotation: 6000;
+  --animate-auto-rotation: 20000;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1f1f1f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 50px 0;
+}
+
+.container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.card-wrapper {
+  perspective: 1000px;
+  transition: filter var(--transition-speed);
+  filter: brightness(1.1);
+}
+
+.card-wrapper:has(.holo-card:hover) {
+  filter: brightness(1.3);
+}
+
+.holo-card {
+  width: 225px;
+  height: 318px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 250ms;
+  cursor: pointer;
+  perspective: 1000px;
+  border-radius: var(--border-radius);
+  background-size: cover;
+}
+
+@media screen and (min-width: 320px) {
+  .holo-card {
+    width: 300px;
+    height: 418px;
+  }
+}
+
+.card-shadow {
+  position: absolute;
+  inset: 0px;
+  transform: translate3d(0px, 0px, -1px);
+  z-index: -1;
+  filter: blur(10px);
+  transition: inset var(--transition-speed), filter var(--transition-speed);
+}
+
+.holo-card:hover .card-shadow {
+  inset: -5px;
+  filter: blur(14px) brightness(1);
+}
+
+.sparks {
+  background-image: url('/sparkles.webp');
+  background-size: cover;
+  mix-blend-mode: screen;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+}
+
+.gradient {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--border-radius);
+  background-image: linear-gradient(125deg, rgba(255,255,255,0) 0%, rgba(255,235,0,1) 25%, rgba(4,249,238,1) 46%, rgba(214,0,255,1) 49%, rgba(145,255,128,1) 74%, rgba(255,255,255,0) 100%);
+  mix-blend-mode: screen;
+}
+
+.animate {
+  animation: animate-auto-rotate var(--animate-rotation-ms) ease-in-out;
+}
+
+@keyframes animate-auto-rotate {
+  0% {
+      transform: rotateX(0deg) rotateY(0deg) translateY(0px);
+  }
+  15% {
+      transform: rotateX(15deg) rotateY(340deg) translateY(-100px);
+  }
+  20% {
+      transform: rotateX(15deg) rotateY(340deg) translateY(-100px);
+  }
+  45% {
+      transform: rotateX(-20deg) rotateY(-30deg) translateY(-100px);
+  }
+  50% {
+      transform: rotateX(-20deg) rotateY(-30deg) translateY(-100px);
+  }
+  75% {
+      transform: rotateX(-15deg) rotateY(25deg) translateY(-100px);
+  }
+  80% {
+      transform: rotateX(-15deg) rotateY(25deg) translateY(-100px);
+  }
+}
